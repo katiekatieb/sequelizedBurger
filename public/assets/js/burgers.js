@@ -23,6 +23,21 @@ $(function() {
   $(".devourBurger").on("click", function(event) {
     var id = $(this).data("id");
 
+    var newCustomer = {
+      // name: $("#customer").val().trim(),
+      burger_id: id
+    };
+
+    $.ajax("/api/customers", {
+      type: "POST",
+      data: newCustomer
+    }).then(
+      function() {
+        console.log("created new burger");
+        location.reload();
+      }
+    );
+
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
       data: true
